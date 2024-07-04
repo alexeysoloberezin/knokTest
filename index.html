@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js'></script>
+    <script src="model.js" type="text/javascript"></script>
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+
+</head>
+<body>
+    <div id="doc" data-bind="foreach: { data: docList, as: 'category' }">
+        <div class="doc-category" data-bind="attr: { 'data-key': $index() }" >
+            <div
+                    draggable="true"
+                    class="doc-category-title category"
+                    data-bind="click: toggleVisibility, css: { 'active': isVisible }, attr: { 'data-key': $index(), 'data-type': category.type }, draggable: true"
+            >
+                <span data-bind="if: category.items().length > 0">
+                    <svg width="8" height="5" viewBox="0 0 8 5" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.53976 0.193988C3.28126 0.452611 3.28126 0.871922 3.53976 1.13055L6.87001 4.46237C7.12851 4.721 7.54762 4.721 7.80612 4.46237C8.06462 4.20375 8.06462 3.78444 7.80612 3.52581L4.47587 0.193988C4.21737 -0.0646358 3.79826 -0.0646353 3.53976 0.193988Z"
+                          fill="#0066FF"/>
+                    <path d="M4.47058 0.193988C4.72908 0.452611 4.72908 0.871922 4.47058 1.13055L1.12999 4.47272C0.871489 4.73134 0.452377 4.73134 0.193876 4.47272C-0.0646252 4.2141 -0.0646252 3.79479 0.193876 3.53616L3.53447 0.193988C3.79297 -0.0646358 4.21208 -0.0646353 4.47058 0.193988Z"
+                          fill="#0066FF"/>
+                    </svg>
+                </span>
+                    <span class="doc-category-txt" data-bind="text: category.title"></span>
+                    <span class="doc-grab doc-grab-handler"><img  src="arrow.svg" alt=""></span>
+                </div>
+            <div data-bind="foreach: { data: category.items, as: 'item' }, css: { 'active': isVisible }" class="doc-category-box">
+                <div class="doc-category-title item" data-bind="attr: { 'data-key': $index(), 'data-category': $parentContext.$index(), 'data-type': 'item' }, draggable: true" draggable="true">
+                    <div class="doc-category-txt" data-bind="text: item.name"></div>
+                    <span class="doc-grab"><img src="arrow.svg" alt=""></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
